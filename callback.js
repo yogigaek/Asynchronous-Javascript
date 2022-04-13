@@ -12,17 +12,12 @@ $.ajax({
            <td>
              ${b.address.street},
              ${b.address.suite}, 
-             ${b.address.city},
-             ${b.address.zipcode},
-             ${b.address.geo.lat},
-             ${b.address.geo.lng}
+             ${b.address.city}, 
             </td>
            <td>${b.phone}</td>
            <td>${b.website}</td>
            <td>
-           ${b.company.name},
-           ${b.company.catchPhrase},
-           ${b.company.bs}
+           ${b.company.name}
            </td>
          </tr>`;
         });
@@ -33,15 +28,11 @@ $.ajax({
     }
 });
 
-const table = document.getElementById(`dataB`);
-table.innerHTML = message(`Loading...`);
-const data = fetch(`https://jsonplaceholder.typicode.com/users`)
-data.catch(load => {
-    table.innerHTML = message(load.message)
-});
-
-function message(msg) {
+// Asynchr pertama dijalankan
+function message(msg){
     return `<tr>
-            <td class="text-center" colspan="8">${msg}</td>
-        </tr>`;
-};
+    <td class="text-center" colspan="8">${msg}</td>
+    </tr>`;
+}
+let table = document.getElementById(`dataB`)
+table.innerHTML = message(`Loading...`)
