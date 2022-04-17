@@ -1,16 +1,21 @@
-const table = document.getElementById(`dataB`);
-table.innerHTML = message(`Loading...`);
-const data = fetch(`https://jsonplaceholder.typicode.com/users`)
-data
-    .then(response => response.json())
-    .then(response => {
-        table.innerHTML = dataBody(response);
-    })
-    .catch(err => {
-        table.innerHTML = message(err.message)
-    })
-    .finally(() => {})
+getData();
 
+function getData(callback){
+    const table = document.getElementById(`dataB`);
+    table.innerHTML = message(`Loading...`);
+    const data = fetch(`https://jsonplaceholder.typicode.com/users`)
+    data
+        .then(response => response.json())
+        .then(response => {
+            table.innerHTML = dataBody(response);
+        })
+        .catch(err => {
+            table.innerHTML = message(err.message)
+        })
+        .finally(() => {});
+
+    callback(data)
+}
 function dataBody(results) {
     let tb = ``
     results.forEach(b => {
