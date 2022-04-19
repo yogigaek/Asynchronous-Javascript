@@ -1,10 +1,8 @@
-const searchBtn = document.querySelector(`.search-button`);
-searchBtn.addEventListener(`click`, function () {
+function getData(key) {
     const dataNews = document.getElementById(`dataNews`)
     dataNews.innerHTML = message(`Loading...`)
 
-    const inputKeyword = document.querySelector(`.input-keyword`)
-    const data = fetch(`https://newsapi.org/v2/everything?apiKey=7f237570bfa444a7b49515ab49db8476&q=` + inputKeyword.value);
+    const data = fetch(`https://newsapi.org/v2/everything?apiKey=b5305618e2b14b5fad3fd5edc494de20&q= + ${key}`)
     data
         .then(response => response.json())
         .then(response => {
@@ -15,7 +13,16 @@ searchBtn.addEventListener(`click`, function () {
             dataNews.innerHTML = message(err.message)
         })
         .finally(() => {})
-});
+};
+
+window.onload = () => {
+    const inputKeyword = document.querySelector(`.input-keyword`)
+    inputKeyword.onkeyup = () => {
+        getData(inputKeyword.value);
+    }
+};
+
+getData();
 
 function showCards(news) {
     let cards = ``;
@@ -40,5 +47,5 @@ function showCards(news) {
 };
 
 function message(msg) {
-    return `<div class ='alert alert-danger text-center'>${msg}</div>`;
+    return `<div class ='alert alert-secondary text-center'>${msg}</div>`;
 }
